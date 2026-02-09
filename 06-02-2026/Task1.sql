@@ -16,11 +16,15 @@ order_date date not null,
 total_amount decimal not null,
 foreign key (customer_id) references customers(customer_id)
 );
+alter table orders
+add order_status bit default 0;
 
 create table department(
 dept_id int primary key,
 dept_name varchar(20) unique not null
 );
+alter table department
+add status bit default 1;
 
 create table employees(
 emp_id int primary key,
@@ -159,4 +163,12 @@ select * from orders;
 select * from order_items;
 select * from products;
 select * from suppliers;
+
+update department 
+set status=0
+where dept_id in (70,50);
+
+update orders
+set order_status=0
+where order_id in (307,304);
 
